@@ -1,17 +1,17 @@
 var webpack = require('webpack');
-var BellOnBundlerErrorPlugin = require('bell-on-bundler-error-plugin');
 
 module.exports = {
   entry: {
-    index: ['./src/index.js', './src/style.css']
+    index: ['./src/index.js', './src/style.css'],
+    vendor: [
+      'react',
+      'react-dom'
+    ]
   },
   output: {
     path: './dist/',
     filename: '[name].js'
   },
-  plugins: [
-    new BellOnBundlerErrorPlugin()
-  ],
   module: {
     loaders: [{
       test: /\.js$/,
@@ -24,5 +24,8 @@ module.exports = {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
     }]
-  }
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
+  ]
 }
