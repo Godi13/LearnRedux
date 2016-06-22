@@ -10,7 +10,8 @@ module.exports = {
   },
   output: {
     path: './dist/',
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/dist'
   },
   module: {
     loaders: [{
@@ -26,6 +27,11 @@ module.exports = {
     }]
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
-  ]
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js", Infinity),
+    new webpack.HotModuleReplacementPlugin()
+  ],
+  devServer: {
+    hot: true,
+    inline: true
+  }
 }
