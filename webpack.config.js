@@ -5,7 +5,9 @@ module.exports = {
     index: ['./src/index.js', './src/style.css'],
     vendor: [
       'react',
-      'react-dom'
+      'react-dom',
+      'redux',
+      'react-redux'
     ]
   },
   output: {
