@@ -1,31 +1,44 @@
 import except from 'expect';
 import deepFreeze from 'deep-freeze';
 
-const toggleTodo = (todo) => {
-  return {
-    ...todo,
-    completed: !todo.completed
+const todos = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        {
+          id: action.id,
+          text: action.text,
+          completed: false
+        }
+      ];
+    default:
+      return state;
   }
 };
 
-const testToggleTodo = () => {
-  const todoBefore = {
+const testAddTodo = () => {
+  const stateBefore = [];
+  const action = {
+    type: 'ADD_TODO',
     id: 0,
-    text: 'Learn Redux',
-    completed: false
-  }
-  const todoAfter = {
-    id: 0,
-    text: 'Learn Redux',
-    completed: true
-  }
+    text: 'Learn Redux'
+  };
+  const stateAfter = [
+    {
+      id: 0,
+      text: 'Learn Redux',
+      completed: false
+    }
+  ];
 
-  deepFreeze(todoBefore);
+  deepFreeze(stateBefore);
+  deepFreeze(action);
 
   except(
-    toggleTodo(todoBefore)
-  ).toEqual(todoAfter);
+    todos(stateBefore, action)
+  ).toEqual(stateAfter);
 }
 
-testToggleTodo();
-console.log('All test pass');
+testAddTodo();
+console.log('All tests passed');
