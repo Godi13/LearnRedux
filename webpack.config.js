@@ -1,17 +1,18 @@
 var webpack = require('webpack');
 
 module.exports = {
+  devtool: 'cheap-module-eval-source-map',
   entry: {
-    index: ['./src/index.js', './src/style.css'],
-    vendor: [
-      'react',
-      'react-dom',
-      'redux',
-      'react-redux'
-    ]
+    index: './todoList/index.js',
+    // vendor: [
+    //   'react',
+    //   'react-dom',
+    //   'redux',
+    //   'react-redux'
+    // ]
   },
   output: {
-    path: './dist/',
+    path: './dist',
     filename: '[name].js',
     publicPath: '/dist'
   },
